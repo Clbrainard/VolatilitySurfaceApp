@@ -5,7 +5,7 @@ import streamlit as st
 import plotly.graph_objects as go 
 import math
 
-KEY="HB7ZSa2dZbO5DjohKM7L3ll4JtpX1cZH"
+KEY=st.secrets["KEY"]
 
 def plot(ticker):
     surface = IvSurface(ticker,KEY)
