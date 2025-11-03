@@ -7,10 +7,10 @@ import plotly.graph_objects as go
 from ivMatrix import IvMatrix as IVM
 
 class IvSurface:
-    def __init__(self,ticker,api_key):
+    def __init__(self,ticker,api_key,side):
         self.api_key = api_key
         self.ticker = ticker
-        self.matrix = IVM(ticker,api_key).get_IV_matrix()
+        self.matrix = IVM(ticker,api_key,side).get_IV_matrix()
         self.surface = self.rbf_surface(self.matrix)
 
 

@@ -7,8 +7,8 @@ import math
 
 KEY=st.secrets["KEY"]
 
-def plot(ticker):
-    surface = IvSurface(ticker,KEY)
+def plot(ticker,side):
+    surface = IvSurface(ticker,KEY,side)
     plt = surface.get_plot()
     plt.update_layout(
         height=800,   # try 700–900 px depending on preference
@@ -27,6 +27,9 @@ st.title("Volatility Surface visualizer")
 # ----- Sidebar -----
 st.sidebar.header("Inputs")
 ticker = st.sidebar.text_input("Ticker", value="AAPL").strip()
+side = st.sidebar.selectbox(
+    "Side:",("Call", "Put")
+)
 render = st.sidebar.button("Render")
 
 # ----- Main Area -----
@@ -38,7 +41,7 @@ if render:
     else:
         try:
             with st.spinner(f"Rendering surface for {ticker.upper()}..."):
-                fig = plot(ticker.upper())   # <- your prewritten function
+                fig = plot(ticker.upper(),side)   # <- your prewritten function
             # Render the Plotly figure
             placeholder.plotly_chart(fig, use_container_width=True)
             fig.update_layout(height=800)

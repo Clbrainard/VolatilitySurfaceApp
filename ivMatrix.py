@@ -9,9 +9,10 @@ class IvMatrix:
 
 # AI HELPERS #
 
-    def __init__(self,ticker,api_key):
+    def __init__(self,ticker,api_key,side):
         self.api_key = api_key
         self.ticker = ticker
+        self.side = side
 
     def get_fridays():
         today = date.today()
@@ -55,7 +56,7 @@ class IvMatrix:
         return output
 
     def get_data(self,exp,limit=250):
-        request = f"https://api.massive.com/v3/snapshot/options/{self.ticker}?expiration_date={exp}&contract_type=call&order=asc&limit=250&sort=expiration_date&apiKey={self.api_key}"
+        request = f"https://api.massive.com/v3/snapshot/options/{self.ticker}?expiration_date={exp}&contract_type={self.side}&order=asc&limit=250&sort=expiration_date&apiKey={self.api_key}"
         return self.fulfill_request(request)
 
     def get_IV_chain(self,exp):
