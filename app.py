@@ -28,8 +28,10 @@ st.title("Volatility Surface visualizer")
 st.sidebar.header("Inputs")
 ticker = st.sidebar.text_input("Ticker", value="AAPL").strip()
 side = st.sidebar.selectbox(
-    "Side:",("Call", "Put")
+    "Side:",("call", "put")
 )
+assert side in ["call", "put"]
+
 render = st.sidebar.button("Render")
 
 # ----- Main Area -----
